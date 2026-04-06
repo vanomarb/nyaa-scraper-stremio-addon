@@ -31,13 +31,13 @@ Automatically detects episode numbers from torrent titles and matches them to wh
 
 
 ### Features
-✅ Nyaa.si + AnimeTosho support
-✅ Dynamic title matching (cross-referenced metadata, adaptive variants)
-✅ Improved accuracy with TVDB/TMDB integration
-✅ Real-Debrid instant playback
-✅ Movie, Season and Series filtering (auto-detect)
-✅ Token encryption (secure API keys)
-✅ Configurable sources/categories
+✅ Nyaa.si + AnimeTosho support  
+✅ Dynamic title matching (cross-referenced metadata, adaptive variants)  
+✅ Improved accuracy with TVDB/TMDB integration  
+✅ Real-Debrid instant playback  
+✅ Movie, Season and Series filtering (auto-detect)  
+✅ Token encryption (secure API keys)  
+✅ Configurable sources/categories  
 
 ### Why This Approach?
 - **Zero user data stored**: Fully stateless
