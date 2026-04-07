@@ -4,25 +4,15 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
-## [1.3.0] - Current Version
-
-### Added
-- **Outdated Addon Override** — When a user's installed addon config is from version ≤ 1.2.1 (or has no version tag), the stream endpoint returns a single informational stream instead of results: `⚠️ Outdated addon detected — Please reinstall the addon to refresh manifest or meta`
-- **Config Version Embedding** — New installs from the configure page always embed `v=1.3.0` in the manifest URL config segment, enabling server-side version detection going forward.
+## [1.3.0] - Patch Release
 
 ### Fixed
-- **Mirror Health — Inaccurate Failure Marking** — Mirror health tracking now distinguishes error types: HTTP 502/503/504 (upstream overloaded) no longer marks the mirror as unhealthy — the request is silently skipped. HTTP 429 backs off the mirror with a rate-limited cooldown. Only genuine connection or parse failures mark a mirror unhealthy.
-- **Mirror Rotation — Infinite Loop** — Replaced the snapshot-length-gated mirror loop with a partition strategy: mirrors are split into `ready` (healthy or cooling-off expired) and still-cooling sets, then tried in that order. All mirrors are always considered, eliminating the infinite loop when only cooling-off mirrors remain.
-- **Batch Torrent — Unwanted RD Downloads** — `batchResolver` no longer adds magnets or calls `selectFiles` at stream-list-build time. File introspection is now read-only (looks up existing RD library entries only). Magnet adding and file selection happen exclusively inside the resolve route when the user actually clicks a stream.
-- **Batch Torrent — Episode File Index** — `_selectTorrentFiles` and `_createTorrentId` now receive and honour the specific `fileIndex`, so RD only downloads the requested episode file instead of every file in the pack.
-- **Batch Torrent — Cached File Selection Overwrites** — `_resolveCachedFileIds` now always returns the single `fileIndex + 1` for integer indexes, preventing previously cached multi-file selections from re-triggering full-pack downloads.
-- **Resolve Route — Duplicate RD Requests** — Added in-flight deduplication for the `/resolve` route. Concurrent requests for the same `infoHash:fileIndex` share one promise instead of racing to add the same magnet multiple times.
-- **Resolve Route — Stremio HEAD Preflight** — Added an explicit `HEAD /resolve/:rdKey/:infoHash/:fileIndex/:title` handler that returns 200 immediately, preventing Stremio's URL-validation preflight from triggering unnecessary RD pipeline work.
-- **Error Wrapping** — Several `Promise.reject(string)` calls converted to `Promise.reject(new Error(...))` for proper stack traces in error logs.
-
-### Improved
-- **Episode Number Parsing** — `parseFileEpisodeNumber` in `batchResolver` overhauled with a ported Amatsu-style parser: pre-sanitizes resolution/codec/audio/group noise, handles CJK episode markers (第01話, 01화), season-prefix guarding (S2 files excluded from S1 requests), and a right-to-left token scan as final fallback.
-- **Fallback Stream Label** — When RD file list is unavailable (torrent not yet in library), the fallback stream descriptor now derives a clean display name from the pack title (strips group tags, resolution labels, year) plus the target episode number instead of showing `null`.
+- **Real-Debrid Auto-Downloads** — Pack torrents (multiple episodes) no longer automatically download all files when browsing for streams. Only the episode you select will be downloaded, saving bandwidth and avoiding cluttered RD libraries.
+- **Single Episode Selection** — When you click a specific episode from a multi-file torrent pack, Real-Debrid now only downloads that one episode instead of all files in the pack.
+- **Faster RD Queries** — Eliminated duplicate requests to Real-Debrid that were slowing down stream playback. Each file is checked once, delivering results faster.
+- **Nyaa Mirror Reliability** — Fixed mirror selection to handle temporary service issues better. Mirrors that are temporarily overloaded are now retried instead of being marked permanently broken.
+- **Episode Number Detection** — Better at parsing episode numbers from filenames, including Asian formats (Japanese, Chinese, Korean characters). Works with more torrent naming styles.
+- **Cleaner Stream Names** — Stream display names are now clean and readable, showing episode info instead of raw technical details.
 
 ---
 
