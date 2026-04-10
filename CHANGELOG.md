@@ -4,6 +4,21 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.3.1] - Patch Release
+
+### Added
+- **Smart Torrent Title Recognition** — The addon now uses intelligent matching to extract season, episode, and title information from torrent filenames. It recognizes Japanese, Chinese, and Korean anime titles with high accuracy, handles various naming conventions (different formatting, symbols, and abbreviations), and automatically corrects common parsing mistakes. This means it finds the right episodes even when torrent names are messy or use unusual formatting.
+- **Accurate File Sizes for Batch Downloads** — When you select an episode from a multi-file pack, the addon now shows the estimated file size for just that episode instead of the whole pack size. Makes it easier to know what you're getting before downloading.
+- **Improved Stream Information** — Stream listings now show clearer episode numbers, titles, file sizes, and quality information. Better icons and formatting make it easier to spot what you want at a glance.
+- **Faster Streaming** — Direct playback links are now cached, so if you replay the same episode, it loads instantly without contacting Real-Debrid again.
+
+### Fixed
+- **Better Error Messages** — Real-Debrid errors are now properly reported, making it easier to troubleshoot issues if something goes wrong.
+- **Metadata Without Real-Debrid** — Episode lists and metadata now work correctly even if you haven't connected a Real-Debrid account.
+- **Stable Nyaa Access** — Nyaa mirror selection is more reliable and handles temporary outages better.
+
+---
+
 ## [1.3.0] - Patch Release
 
 ### Fixed
