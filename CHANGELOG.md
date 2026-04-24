@@ -4,6 +4,24 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.3.2] - Internal Refactor
+
+### Changed
+- **Unified Logging System** — Implemented centralized logger with 3-level control (`LOG_LEVEL=1|2|3`), replacing scattered `console.*` calls with consistent `[DEBUG]`, `[INFO]`, `[WARN]`, `[ERROR]` prefixes
+- **Code Quality Improvements** — Removed 10 dead code files and unused exports; reduced `src/` from 37 → 27 files through intelligent module merging
+- **Reduced Comment Verbosity** — Trimmed verbose JSDoc and inline comments to short, actionable summaries per method/block
+- **In-Memory Cache Abstraction** — Extracted `createMemCache()` factory for consistent cache behavior across all metadata sources (Kitsu, IMDB, TMDB, TVDB)
+
+### Fixed
+- **TVDB ID Resolution Bug** — Fixed `tvdbIdFromImdb()` using hardcoded URL; now correctly uses dynamic `imdbId` parameter
+
+### Internal
+- **Module Consolidation** — Merged 5 tiny utilities into `helpers.js`, 2 limiters into `limiters.js`, and 2 DB files into single `db/index.js`
+- **Module Refactoring** — Absorbed `cache/metadataService.js` into `cache/metadata.js` for improved cohesion
+- ✅ All verifications passing: app startup clean, logging levels functional, `console.*` completely removed, full test coverage
+
+---
+
 ## [1.3.1] - Patch Release
 
 ### Added
