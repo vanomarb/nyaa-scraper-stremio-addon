@@ -4,6 +4,14 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.6.1] - Patch: TorBox & Source Tag Fixes
+
+### Fixed
+- **TorBox Availability Check** — Fixed TorBox cached torrent detection using the wrong request format. Availability checks now work correctly, properly showing which torrents TorBox can deliver instantly.
+- **Provider Tag Missing on Cached Results** — Torrents loaded from cache were losing their source tag (e.g. "nyaa"), causing them to display incorrectly in stream results. This is now preserved correctly.
+
+---
+
 ## [1.6.0] - Smarter Anime Search
 
 ### Added
