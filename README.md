@@ -6,7 +6,7 @@ I had a hard time finding a good addon for anime metadata—especially for dongh
 
 
 ### What It Does
-Searches Nyaa.si or AnimeTosho for anime torrents in real-time, automatically matches episodes, and streams them directly in Stremio. With Real-Debrid, instantly plays cached torrents at full speed. Without it, plays uncached torrents depending on seeders.
+Searches Nyaa.si or AnimeTosho for anime torrents in real-time, automatically matches episodes, and streams them directly in Stremio. With Real-Debrid, instantly plays cached torrents at full speed. Without it, you can either rely on seeders or enable **P2P mode** for direct peer-to-peer playback with faster peer discovery via DHT trackers.
 
 ### Technical Highlights
 
@@ -15,8 +15,14 @@ When searching for an anime, the addon dynamically generates multiple query vari
 
 Instead of trying all variants sequentially, it uses an **early-stop pattern**: it tests queries one by one and stops as soon as it finds results, then caches that entire group for future requests. This means subsequent searches using any of those titles will instantly hit the cache without re-scraping.
 
-**Episode Filtering**
-Automatically detects episode numbers from torrent titles and matches them to what you're watching.
+**Smart Episode Matching**
+Automatically detects episode numbers from torrent titles and matches them to what you're watching. Handles Japanese, Chinese, and Korean naming conventions and corrects common parsing mistakes. For multi-file batch torrents, the addon shows estimated per-episode file sizes instead of the full pack size.
+
+**Resolution Filtering**
+Choose which video resolutions to allow (4K, 1440p, 1080p, 720p, 480p). Unwanted resolutions are excluded from results entirely, so you only see streams matching your quality preferences.
+
+**P2P Direct Streaming**
+An optional P2P mode lets you watch without Real-Debrid. Magnet links are enriched with DHT trackers for fast peer discovery, reducing connection time from 30+ seconds down to 5–10 seconds.
 
 **Real-Debrid Integration**
 - Shows `[RD+]` for cached torrents → instant playback
@@ -35,6 +41,11 @@ Automatically detects episode numbers from torrent titles and matches them to wh
 ✅ Dynamic title matching (cross-referenced metadata, adaptive variants)  
 ✅ Improved accuracy with TVDB/TMDB integration  
 ✅ Real-Debrid instant playback  
+✅ P2P direct streaming (no RD required)  
+✅ Resolution filtering (4K, 1440p, 1080p, 720p, 480p)  
+✅ Smart episode matching (JP/CN/KR naming support)  
+✅ Accurate per-episode file sizes for batch torrents  
+✅ Anime-only content filtering (genre detection)  
 ✅ Movie, Season and Series filtering (auto-detect)  
 ✅ Token encryption (secure API keys)  
 ✅ Configurable sources/categories  
