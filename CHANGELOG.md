@@ -4,6 +4,18 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.6.0] - Smarter Anime Search
+
+### Added
+- **Absolute Episode Matching** — When searching for a seasonal episode (e.g. Season 4 Episode 97), the addon now also searches by the absolute episode number (e.g. Episode 182) using cached series metadata. This finds fansub releases that use continuous episode numbering instead of season/episode notation.
+- **Version Badge** — The configure page now shows the current addon version next to the Stremio badge. Click it to view what changed in this release.
+
+### Improved
+- **Search Result Caching** — Priority search patterns (like "Show S04" and "Show Season 4") are now cached for 5 minutes, reducing repeated requests to Nyaa for the same episode.
+- **Nyaa Source Simplified** — Removed unreliable mirror fallback logic. Requests now go directly to nyaa.si for faster, more predictable results.
+
+---
+
 ## [1.5.0] - Multi-Debrid Support
 
 ### Added
