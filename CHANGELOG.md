@@ -4,6 +4,26 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.4.0] - P2P Streaming & Resolution Filters
+
+### Added
+- **P2P Direct Magnet Links** — Optional P2P streaming mode lets you watch without Real-Debrid. Direct peer-to-peer connections provide instant playback without needing to wait for RD caching. Also works with trackers for faster peer discovery. Toggle in Optional Settings (only shows when no RD key is configured).
+- **Video Resolution Filter** — Choose which resolutions to include when searching (4K, 1440p, 1080p, 720p, 480p). Rejected resolutions are excluded from results entirely, so you only see streams that match your quality preferences. Uncheck unwanted resolutions in Optional Settings.
+- **Responsive Optional Settings Modal** — Settings modal now uses 3-column layout on larger screens (while keeping 2 columns on mobile) for a cleaner, more spacious interface.
+
+### Improved
+- **Faster P2P Peer Discovery** — Magnet links are now enriched with comprehensive DHT trackers when P2P mode is active. Reduces initial peer connection time from 30+ seconds to 5-10 seconds, making P2P streams practical for immediate playback.
+- **Configuration Management** — Added URL parameters `p2p=true` and `resolutions=4K,1080p,720p` for persisting user preferences in saved configurations.
+
+### Fixed
+- **P2P Mutual Exclusivity** — P2P toggle automatically hides when an RD key is present (they don't work together). If RD key is cleared, P2P option reappears. RD always takes priority if both settings somehow exist in a URL.
+
+### Internal
+- **Tracker Enrichment** — Integrated existing `getMagnetLink()` from httpHelper to provide optimal tracker set (fetches from GitHub + anime-specific trackers) instead of a static list.
+- **Resolution Filtering** — Applied at stream-building stage, filtering after episode/season matching but before stream output for efficiency.
+
+---
+
 ## [1.3.2] - Internal Refactor
 
 ### Changed
