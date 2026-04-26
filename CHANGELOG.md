@@ -4,6 +4,17 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.5.0] - Multi-Debrid Support
+
+### Added
+- **TorBox & AllDebrid Support** — You can now use TorBox or AllDebrid as your debrid service in addition to Real-Debrid. Switch between services using the new dropdown on the configure page — no more manual URL editing.
+- **API Key Validation** — The Install button now validates all your API keys (debrid, TVDB, TMDB) before showing install options. If a key is wrong or expired, you'll see a clear error message pointing to exactly which key failed and why.
+
+### Improved
+- **Cleaner Configuration URLs** — All service tokens now use consistent named parameters (e.g. `rd=TOKEN`, `torbox=TOKEN`, `ad=TOKEN`) instead of a legacy positional format. URLs are shorter and easier to read and share.
+
+---
+
 ## [1.4.2] - Performance Optimization
 
 ### Improved
