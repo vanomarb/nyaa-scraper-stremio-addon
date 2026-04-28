@@ -4,6 +4,18 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.6.2] - Patch: Debrid Service Bug Fixes
+
+### Fixed
+- **AllDebrid & TorBox: Wrong episode selected** — Multi-episode torrents now pick the correct episode instead of always grabbing the largest or wrong file.
+- **AllDebrid & TorBox: Faster repeat plays** — Resolved video links are now cached, so replaying an episode skips the full debrid pipeline and starts faster.
+- **AllDebrid: Blocked account error** — Properly handles `AUTH_BLOCKED` errors with a clear blocked-access response instead of crashing silently.
+- **TorBox: Queued torrents stuck** — Torrents in a queued state no longer cause an error; they now correctly show as downloading.
+- **TorBox: Zipped/archived torrents** — Correctly detects when TorBox only has a zipped version of a torrent and shows the "archive unavailable" message.
+- **General: Network hiccups** — Temporary connection errors (timeout, reset) on AllDebrid and TorBox now return a "downloading" state instead of failing the stream entirely.
+
+---
+
 ## [1.6.1] - Patch: TorBox & Source Tag Fixes
 
 ### Fixed
