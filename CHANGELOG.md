@@ -4,6 +4,32 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.7.0] - Feature: Performance Tuning, UI Overhaul & Search Fixes
+
+### Added
+- **Performance Tuning Controls** — New configurable options to optimize stream search speed based on your preferences:
+  - **Max Streams to Return** — Stop searching once you have enough good streams (default: 8). Lower values = faster results, higher = more comprehensive search.
+  - **Batch Expansion Limit** — Control how many batch torrents to expand via debrid service API calls (default: 3). Reduces API usage on slow connections.
+  - **Seeder Threshold** — Only expand batch torrents with minimum seeders (default: 100). Filters out low-quality sources automatically.
+  - **Concurrent Searches** — Run multiple search queries in parallel (default: 3). Higher = faster discovery, lower = lighter server load.
+  - **Parallel Metadata** — Fetch metadata and torrents simultaneously instead of waiting for metadata first (default: on). Saves 5-10 seconds per search.
+- **Info buttons on advanced settings** — Every advanced setting now has a small info button that opens a popover explaining what it does and when to change it — no more guessing what "Batch Seeder Threshold" means.
+
+### Improved
+- **Faster Search Results** — Intelligent early-exit logic now returns results as soon as high-quality streams are found, instead of waiting to exhaust all search patterns.
+- **Redesigned configure page** — The setup page has a completely new look: deeper dark background, ambient purple lighting, new heading font, and a monospace detail font for a cleaner, more polished feel.
+- **Cleaner Configuration UI** — Performance tuning settings moved to a collapsed "Advanced" accordion section, reducing UI clutter and making basic configuration simpler.
+- **Smarter Batch Filtering** — Low-seeder torrents in batch expansions are automatically skipped, reducing unnecessary debrid API calls and improving speed on rate-limited services.
+- **Batch Expansion setting hides when not applicable** — The "Max Batch Expansions" option now only appears when Real-Debrid is selected, since batch expansion is an RD-only feature.
+
+### Fixed
+- **Batch torrents no longer crash when expanding** — A bug caused batch torrent expansion to fail entirely for all three fallback cases (no debrid key, no file list, no video files). These now correctly return a fallback stream descriptor instead of throwing an error.
+- **Wrong season shown in stream descriptions** — Stream descriptions were always displaying "Season 1" for torrents that don't include an explicit season marker in their title (e.g. absolute-numbered releases). The season label now correctly falls back to the actual requested season.
+- **Donghua episode releases not matched** — Releases using pipe-surrounded episode numbers like `| 024 |` (common in Chinese/Donghua fansub groups) were not being parsed as episodes, causing them to be silently dropped. These are now correctly detected and matched.
+- **Non-batch torrents wrongly treated as batch packs** — Single-episode torrents from fansub groups that omit a season marker were being classified as season pack "batches" due to a defaulted season value. This caused them to bypass all episode matching and get dropped. Only torrents with an explicit season marker (e.g. `S01`) are now treated as season packs.
+
+---
+
 ## [1.6.2] - Patch: Debrid Service Bug Fixes
 
 ### Fixed
