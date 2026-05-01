@@ -4,6 +4,16 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.7.1] - Patch: Stream Quality & Completeness Fixes
+
+### Improved
+- **Streams now sorted by your resolution preference** — Results are returned in the order you configured (e.g. 4K first, then 1080p, then 720p), regardless of whether a torrent is cached or not.
+
+### Fixed
+- **Missing streams when some are already cached** — When one torrent was cached on your debrid service and another wasn't, only the cached stream was returned. Now all available streams up to your limit are shown.
+
+---
+
 ## [1.7.0] - Feature: Performance Tuning, UI Overhaul & Search Fixes
 
 ### Added
