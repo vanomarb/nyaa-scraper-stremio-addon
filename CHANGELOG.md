@@ -7,7 +7,7 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 ## [1.7.0] - Feature: Performance Tuning, UI Overhaul & Search Fixes
 
 ### Added
-- **Performance Tuning Controls** — New configurable options to optimize stream search speed based on your preferences:
+- **Performance Tuning Controls in Optional Settings** — New configurable options to optimize stream search speed based on your preferences:
   - **Max Streams to Return** — Stop searching once you have enough good streams (default: 8). Lower values = faster results, higher = more comprehensive search.
   - **Batch Expansion Limit** — Control how many batch torrents to expand via debrid service API calls (default: 3). Reduces API usage on slow connections.
   - **Seeder Threshold** — Only expand batch torrents with minimum seeders (default: 100). Filters out low-quality sources automatically.
