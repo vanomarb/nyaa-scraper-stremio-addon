@@ -4,12 +4,28 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
-## [1.8.2] - Fixed Wrong Episode & Improved Cache Reuse
+## [1.8.3] - Smarter Search Pipeline & Stability Fixes
+
+### Improved
+- **Anime titles pattern are too messy** — Shows sourced from TVDB (rather than Kitsu) were routing all their title variants through the wrong search path, causing them to fire every alternate title query even after already finding results. Search now takes the correct path for each type of show, stopping as soon as it has what it needs.
+- **Search stops earlier when you already have enough streams** — Previously, the addon would continue running searches even after finding more than enough results to fill your stream limit. All search phases now respect your configured stream count and stop immediately once it's met.
+- **Alt title searches only run when they're actually needed** — The addon now runs primary title searches first (e.g. English + Romaji). If those find batch torrents (full-season packs), alternative title variants (abbreviated names, raw Japanese titles, etc.) are skipped entirely. This cuts out several unnecessary Nyaa requests per episode on well-known shows.
+- **Batch torrent search stops after first success** — When scanning alt titles for batch packs, the search now stops as soon as any batch is found, rather than continuing through all remaining variants.
+- **Slightly more human-like request timing** — Parallel Nyaa requests now include a small random delay (up to 250ms) so they don't all land at exactly the same millisecond interval.
+- **More streams returned when your limit is above 15** — A server-side cap was incorrectly limiting stream processing to 15 regardless of your configured maximum. If you set your stream limit to 20, you now get up to 20 streams processed.
+
+### Fixed
+- **RealDebrid "unknown resource" error when clicking a stream after leaving mid-load** — If you clicked a stream and navigated away before it finished adding to RealDebrid, the torrent would be left in a broken half-added state. The next time you clicked the same stream, the addon would find this stale entry, fail to fetch its info (404), and crash the request instead of recovering. It now detects this situation and cleanly re-adds the torrent, so playback works on the next attempt.
+
+---
+
+## [1.8.2] - Fixed Wrong Episode, Improved Cache Reuse & Stale Link Detection
 
 ### Fixed
 - **Batch torrents now use cached download links correctly** — When streaming multi-episode torrents (batches), the addon was bypassing the download link cache even when already cached, forcing unnecessary re-downloads from RealDebrid. The cache is now reused properly for each episode's file within a batch torrent, avoiding redundant API calls and download delays.
 - **Accurate RealDebrid availability labels on batch episodes** — The [RD+] indicator now correctly shows whether each individual episode file is cached, rather than marking all batch episodes cached if any file was. Filename-based matching ensures the right episode file is identified even when multiple torrents share the same hash.
 - **Batch stream URLs now mapped correctly per episode** — Fixed an edge case where requesting episode 2 from a batch torrent could return episode 1's download link, causing playback of the wrong episode. The cache key now includes the specific file index, making it unique per episode within a batch.
+- **Expired or deleted stream links no longer get served from cache** — The addon now checks whether a previously saved stream link is still reachable before using it. If the debrid service has expired or removed the link (which happens after a few days), the addon falls back to generating a fresh one rather than handing Stremio a broken URL. This applies to RealDebrid, AllDebrid, and TorBox.
 
 ### Internal
 - **Download link cache now embedded in torrent entries** — Resolved URLs are now stored directly on each torrent's data array entry (with fileIndex as the key), replacing the old root-level map. This prevents cache contamination and ensures each episode gets its own link, especially important for batch torrents spanning multiple episodes.
