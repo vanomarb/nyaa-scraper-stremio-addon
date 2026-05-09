@@ -1,3 +1,24 @@
+<p align="center">
+    <picture>
+          <source srcset="https://nyaa.si/static/favicon.png">
+          <img alt="AIOStreams Logo" src="https://nyaa.si/static/favicon.png" width=128 height=128>
+    </picture>
+</p>
+
+<h1 align="center">Unofficial Nyaa Scraper Addon</h1>
+
+## 🔗 Install / Instance
+Install the addon directly in Stremio using the instance below:
+
+### Public Instance
+**Addon URL:**
+[https://nyaa-scraper-stremio-addon.nmtl.app/configure](https://nyaa-scraper-stremio-addon.nmtl.app/configure)
+
+### Nightly Instance
+**Addon URL:**
+[https://nyaa-scraper-nightly.nmtl.app/configure](https://nyaa-scraper-nightly.nmtl.app/configure)
+
+
 # 🎌 Introduction of Nyaa Anime Scraper Stremio Addon
 
 Hi everyone! I built an anime streaming addon for Stremio that connects to Nyaa.si and AnimeTosho, with Real-Debrid support.
