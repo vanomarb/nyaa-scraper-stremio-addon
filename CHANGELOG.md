@@ -4,6 +4,22 @@ All notable changes to the Nyaa Stremio Addon are documented here.
 
 ---
 
+## [1.8.6] - Faster Searches and More Reliable Stream Matching
+
+### Improved
+- **Up to 6× faster stream search** — Uncached episodes now return in ~6 seconds instead of up to 40 seconds. The addon reads metadata from cache before firing any Nyaa queries, so the correct episode number and title are known upfront and only 1–2 targeted searches are needed.
+- **Multi-season shows now find the right episode on the first try** — For shows with multiple seasons (such as long-running donghua), the addon previously had to guess the absolute episode number, get it wrong, and retry. It now looks up the exact mapping (e.g. S4E55 → episode 140) from the metadata cache before searching, so no retry is needed.
+- **Search stops as soon as there's enough, but never wastes a completed search** — If two queries run in parallel and the first one fills your stream limit, the second one's results are now still absorbed into the cache. That way future viewers get a fuller pool to choose from without triggering an extra search.
+- **More torrents saved to cache per episode** — All filtered matching torrents are cached regardless of your personal stream limit, so viewers with different resolution or language settings can get results from cache without triggering a new search.
+- **TVDB shows (including Chinese donghua) now match the right English title on Nyaa** — Shows whose primary title on TVDB is non-Latin (e.g. Chinese) now look up their English season name directly from TVDB and use it as the primary search term.
+- **Episode lists are now always fetched for season/episode mapping** — A bug was causing the episode list to never load for many shows, which meant the season/episode → absolute episode map was always empty. This is now fixed.
+- **Title aliases from multiple concurrent requests now merge instead of overwrite** — If two requests arrive at the same time with different title variants (e.g. English vs Romaji), both sets of aliases are saved to the same cache document so future lookups succeed regardless of which title is used.
+
+### Fixed
+- **Stale cached data (from a previous bug) is now replaced instead of reused** — If the cache contained wrong-episode torrents from an older buggy run, the addon would return them and produce no playable streams. It now detects this case and replaces the stale data with a fresh correct search.
+
+---
+
 ## [1.8.5] - Stremio v4 P2P Compatibility Fix
 
 ### Fixed
