@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-          <source srcset="https://nyaa.si/static/favicon.png">
-          <img alt="AIOStreams Logo" src="https://nyaa.si/static/favicon.png" width=128 height=128>
+          <source srcset="https://nyaa.si/static/img/avatar/default.png">
+          <img alt="Nyaa Logo" src="https://nyaa.si/static/img/avatar/default.png" width=128 height=128>
     </picture>
 </p>
 
